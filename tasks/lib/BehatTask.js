@@ -111,6 +111,8 @@ function BehatTask (options) {
         if (failedTasks[task] < options.numRetries) {
             options.log('Retrying: ' + tasks[task] + ' ' + (failedTasks[task] + 1) + ' of ' + options.numRetries + ' time(s)');
             options.executor.addTask(task);
+        } else {
+            options.fail.warn('Feature failed!');
         }
     }
 
