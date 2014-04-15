@@ -24,12 +24,11 @@ var glob = require('glob'),
  * @param {Grunt} grunt
  */
 function GruntTask (grunt) {
-    var options = _.defaults(grunt.config('behat') || {}, defaults),
-        executor = new ParallelExec(options.maxProcesses, {cwd: options.cwd, timeout: options.timeout}),
-        behat;
-
-    grunt.registerTask('behat', 'Parallel behat', function () {
-        var done = this.async();
+    grunt.registerMultiTask('behat', 'Parallel behat', function () {
+        var options = _.defaults(this.data || {}, defaults),
+            executor = new ParallelExec(options.maxProcesses, {cwd: options.cwd, timeout: options.timeout, env: options.env}),
+            behat,
+            done = this.async();
 
         glob(options.src, function (err, files) {
             options.files = files;
@@ -42,7 +41,6 @@ function GruntTask (grunt) {
             behat.run();
         });
     });
-
 }
 
 module.exports = GruntTask;
