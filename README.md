@@ -37,11 +37,13 @@ By default it will assume the behat.yml is in the same folder as the grunt file 
 
 grunt.initConfig({
     behat: {
-        src: '/path/to/features/**/*.feature',
-        config: './behat/behat.yml',
-        maxProcesses: 5,
-        bin: './bin/behat',
-        flags: '--tags @wip'
+        default: {
+            src: '/path/to/features/**/*.feature',
+            config: './behat/behat.yml',
+            maxProcesses: 5,
+            bin: './bin/behat',
+            flags: '--tags @wip'
+        }
     }
 });
 ```
